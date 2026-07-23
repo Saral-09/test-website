@@ -3,7 +3,7 @@
 
 <head>
     <title>Scam Simulation</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
         * {
@@ -14,8 +14,8 @@
         body {
             margin: 0;
             height: 100%;
-            overflow: hidden;
             font-family: Arial;
+            overflow: hidden;
         }
 
         body {
@@ -24,42 +24,36 @@
             flex-direction: column;
         }
 
-        /* Header bar with back arrow, avatar, name, call icon */
         .header {
-            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 12px 14px;
-            padding-top: calc(12px + env(safe-area-inset-top));
-            border-bottom: 1px solid #e2e2e2;
+            border-bottom: 1px solid #ddd;
             background: #f7f7f8;
         }
 
         .back {
-            font-size: 26px;
+            font-size: 28px;
             color: #34c759;
-            width: 26px;
+            padding-right: 50px;
         }
 
         .contact {
             display: flex;
             flex-direction: column;
             align-items: center;
-            flex: 1;
         }
 
         .avatar {
-            width: 34px;
-            height: 34px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
-            background: #b8b8bd;
-            color: white;
+            background: rgb(167, 166, 166);
             display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 15px;
-            margin-bottom: 2px;
+            align-items: center;
+            overflow: hidden;
         }
 
         .name {
@@ -69,278 +63,224 @@
 
         .status {
             font-size: 11px;
-            color: #888;
+            color: #777;
         }
 
         .call {
             font-size: 20px;
-            width: 26px;
-            text-align: right;
+            padding-left: 50px;
+            color: green;
         }
 
-        /* Chat area fills remaining space and scrolls internally */
+        .menu {
+            font-size: 25px;
+            padding-left: 1px;
+            color: green;
+        }
+
         #chat {
             flex: 1;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            padding: 12px;
-        }
-
-        #options,
-        #result {
-            flex-shrink: 0;
-            padding: 0 12px;
-            padding-bottom: calc(12px + env(safe-area-inset-bottom));
-        }
-
-        button {
-            width: 100%;
-            padding: 15px;
-            margin: 8px 0;
-            font-size: 16px;
-            border-radius: 10px;
-            border: none;
-            background: #b8c5ff;
+            padding: 10px;
+            overflow: auto;
         }
 
         .message {
             background: #e5e5ea;
-            color: black;
-            padding: 10px 14px;
+            padding: 10px;
             border-radius: 18px;
-            margin: 5px 0;
-            max-width: 75%;
-            align-self: flex-start;
+            margin: 4px 0;
+            max-width: 80%;
         }
 
         .reply {
             background: #34c759;
             color: white;
-            align-self: flex-end;
+            margin-left: auto;
+            padding-left: 20px;
         }
 
-        /* Full screen warning for the scammed result */
-        .fail-overlay {
+        #options {
+            padding: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin: 6px 0;
+            border: none;
+            border-radius: 10px;
+            background: #b8c5ff;
+            font-size: 16px;
+        }
+
+        .fail-overlay,
+        .pass-overlay {
             position: fixed;
-            inset: 0;
-            background: red;
-            color: white;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            color: white;
             text-align: center;
-            padding: 20px;
         }
 
-        .fail-overlay h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
+        .fail-overlay {
+            background: red;
         }
 
-        .fail-overlay button {
-            width: auto;
-            padding: 12px 30px;
-            margin-top: 20px;
+        .pass-overlay {
+            background: green;
+        }
+
+        .fail-overlay button,
+        .pass-overlay button {
+            width: 150px;
             background: white;
-            color: red;
+            margin-top: 20px;
             font-weight: bold;
         }
 
-        /* On wider screens (desktop/tablet), show as a centered phone mockup */
+        .app {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
         @media (min-width: 480px) {
             body {
-                background: lightgray;
-                align-items: center;
+                background: #ddd;
                 justify-content: center;
+                align-items: center;
             }
 
             .app {
                 width: 380px;
                 height: 700px;
                 max-height: 90vh;
+                background: white;
                 border-radius: 30px;
                 overflow: hidden;
                 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-                display: flex;
-                flex-direction: column;
             }
         }
     </style>
-
 </head>
 
 <body>
-
     <div class="app">
-
         <div class="header">
             <span class="back">&#8249;</span>
             <div class="contact">
-                <div class="avatar">?</div>
+                <span class="avatar">
+                    <span style="font-size:30px; margin-top:10%;">🙍‍♂️</span>
+                </span>
                 <div class="name">Unknown Number</div>
                 <div class="status">Mobile</div>
             </div>
-            <span class="call" style="filter: hue-rotate(120deg);">&#128222;</span>
-            <span class="menu" style="color: green; font-size: 25px; padding-left: 10px;">&#9776;</span>
+            <span class="call">&#128222;</span>
+            <span class="menu">&#9776;</span>
         </div>
 
         <div id="chat"></div>
-
         <div id="options"></div>
-
-        <div id="result"></div>
-
     </div>
 
     <script>
-
         let chat = document.getElementById("chat");
         let options = document.getElementById("options");
-        let result = document.getElementById("result");
 
-
-        // Add message to chat
         function message(text, user) {
-
             if (user == true) {
-                chat.innerHTML += "<div class='message reply'>"
-                    + text + "</div>";
+                chat.innerHTML += "<div class='message reply'>" + text + "</div>";
+            } else {
+                chat.innerHTML += "<div class='message'>" + text + "</div>";
             }
-            else {
-                chat.innerHTML += "<div class='message'>"
-                    + text + "</div>";
-            }
-
             chat.scrollTop = chat.scrollHeight;
-
         }
 
-
-        // Show buttons
-        function showButtons(button1, button2) {
-            options.style.display = "flex";
-            options.style.flexDirection = "column";
-            options.style.paddingTop = "300px";
+        function showOptions(one, two) {
             options.innerHTML = "";
 
             let b1 = document.createElement("button");
-            b1.innerHTML = button1.text;
-            b1.onclick = button1.action;
+            b1.innerHTML = one.text;
+            b1.onclick = one.action;
 
             let b2 = document.createElement("button");
-            b2.innerHTML = button2.text;
-            b2.onclick = button2.action;
-
+            b2.innerHTML = two.text;
+            b2.onclick = two.action;
 
             options.appendChild(b1);
             options.appendChild(b2);
-
         }
 
+        message(
+            "Hi, it's John from Deakin University. I am currently using the repair shop's phone because my phone is being repaired. Can you do me a quick favour? I need your help with something urgent.",
+            false
+        );
 
-        // Start simulation
-
-        message("Hi, it's John. I am using a new phone today. Are you available?");
-
-
-        showButtons(
+        showOptions(
             {
                 text: "Yes, how can I help?",
                 action: function () {
-
                     message("Yes, how can I help?", true);
-
                     secondMessage();
-
                 }
-
             },
-
             {
-                text: "I will call your old number first.",
+                text: "Can I call you to confirm this is you?",
                 action: function () {
-
-                    message("I will call your old number first.", true);
-
+                    message("Can I call you to confirm this is you?", true);
                     secondMessage();
-
                 }
-
-            });
-
-
-
-        // Second message
+            }
+        );
 
         function secondMessage() {
-
-            message("I am in a meeting. Please urgently transfer $500 to this account.<br><br>BSB: 083-XXX<br>Account: 41 XXX 118");
-
-
-            showButtons(
-
-                {
-                    text: "Send money",
-                    action: function () {
-
-                        message("I will send the money.", true);
-
-                        failed();
-
-                    }
-
-                },
-
-                {
-                    text: "Call John first",
-                    action: function () {
-
-                        message("I will verify first.", true);
-
-                        success();
-
-                    }
-
-                }
-
+            message(
+                "I am currently at the repair shop to fix my phone. I have an urgent payment that needs to be completed today, but I do not have access to my banking system right now. Could you please help me process a $500 payment? I will send you the account details.",
+                false
             );
 
-
+            showOptions(
+                {
+                    text: "Sure, send me the payment details.",
+                    action: function () {
+                        message("Sure, send me the payment details.", true);
+                        failed();
+                    }
+                },
+                {
+                    text: "Sorry, I cannot help with this until I can verify who you are.",
+                    action: function () {
+                        message("Sorry, I cannot help with this until I can verify who you are.", true);
+                        passed();
+                    }
+                }
+            );
         }
 
-
-        // Correct answer
-
-        function success() {
-
-            options.innerHTML = "";
-
-            result.innerHTML =
-                "<h2>You Passed</h2>" +
-                "<p>You checked the request before sending money.</p>" +
-                "<button onclick='location.reload()'>Restart</button>";
-
-        }
-
-
-        // Wrong answer - full screen red warning
-
-        function failed() {
-
+        function passed() {
             document.body.innerHTML =
-                "<div class='fail-overlay'>" +
-                "<h1>YOU WERE SCAMMED</h1>" +
+                "<div class='pass-overlay'>" +
+                "<h1>HURRAY YOU PASSED!!</h1>" +
+                "<p>You verified the request before taking action.</p>" +
                 "<button onclick='location.reload()'>Restart</button>" +
                 "</div>";
-
         }
 
-
+        function failed() {
+            document.body.innerHTML =
+                "<div class='fail-overlay'>" +
+                "<h1>YOU FAILED</h1>" +
+                "<p>The attacker used impersonation and urgency.</p>" +
+                "<button onclick='location.reload()'>Restart</button>" +
+                "</div>";
+        }
     </script>
-
-
 </body>
 
 </html>
