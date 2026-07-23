@@ -2,35 +2,61 @@
 <html>
 <head>
 <title>Scam Simulation</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 <style>
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
 body {
     background-color: lightgray;
     font-family: Arial;
-    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
 }
 
 .phone {
     width: 100vw;
     max-width: 400px;
+    height: 100dvh;
+    max-height: 700px;
     background: black;
     padding: 10px;
     border-radius: 20px;
     box-sizing: border-box;
+    display: flex;
 }
 
 .screen {
     background: white;
-    height: 90vh;
+    width: 100%;
     border-radius: 15px;
     padding: 15px;
-    overflow-y: auto;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+h2 {
+    text-align: center;
+    margin: 0 0 10px 0;
+    flex-shrink: 0;
+}
+
+#chat {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#options, #result {
+    flex-shrink: 0;
 }
 
 button {
@@ -43,21 +69,20 @@ button {
     background: #b8c5ff;
 }
 
-h2 {
-    text-align: center;
-}
-
 .message {
-    background: #ddd;
-    padding: 10px;
-    border-radius: 10px;
-    margin: 10px 0;
+    background: #e5e5ea;
+    color: black;
+    padding: 10px 14px;
+    border-radius: 18px;
+    margin: 5px 0;
+    max-width: 75%;
+    align-self: flex-start;
 }
 
 .reply {
-    background: green;
+    background: #34c759;
     color: white;
-    text-align: right;
+    align-self: flex-end;
 }
 
 /* Full screen warning for the scammed result */
@@ -132,6 +157,8 @@ function message(text, user) {
         chat.innerHTML += "<div class='message'>" 
         + text + "</div>";
     }
+
+    chat.scrollTop = chat.scrollHeight;
 
 }
 
