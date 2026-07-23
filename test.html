@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Scam Simulation</title>
+
+<style>
+body {
+    background-color: lightgray;
+    font-family: Arial;
+}
+
+.phone {
+    width: 350px;
+    margin: 30px auto;
+    background: black;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.screen {
+    background: white;
+    height: 600px;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+h2 {
+    text-align: center;
+}
+
+.message {
+    background: #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.reply {
+    background: green;
+    color: white;
+    text-align: right;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+    border: none;
+    background: #b8c5ff;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="phone">
+
+<div class="screen">
+
+<h2>Unknown Number</h2>
+
+<div id="chat"></div>
+
+<div id="options"></div>
+
+<div id="result"></div>
+
+</div>
+
+</div>
+
+
+<script>
+
+let chat = document.getElementById("chat");
+let options = document.getElementById("options");
+let result = document.getElementById("result");
+
+
+// Add message to chat
+function message(text, user) {
+
+    if(user == true)
+    {
+        chat.innerHTML += "<div class='message reply'>" 
+        + text + "</div>";
+    }
+    else
+    {
+        chat.innerHTML += "<div class='message'>" 
+        + text + "</div>";
+    }
+
+}
+
+
+// Show buttons
+function showButtons(button1, button2) {
+
+    options.innerHTML = "";
+
+    let b1 = document.createElement("button");
+    b1.innerHTML = button1.text;
+    b1.onclick = button1.action;
+
+    let b2 = document.createElement("button");
+    b2.innerHTML = button2.text;
+    b2.onclick = button2.action;
+
+
+    options.appendChild(b1);
+    options.appendChild(b2);
+
+}
+
+
+// Start simulation
+
+message("Hi, it's John. I am using a new phone today. Are you available?");
+
+
+showButtons(
+{
+    text:"Yes, how can I help?",
+    action:function(){
+
+        message("Yes, how can I help?",true);
+
+        secondMessage();
+
+    }
+
+},
+
+{
+    text:"I will call your old number first.",
+    action:function(){
+
+        message("I will call your old number first.",true);
+
+        secondMessage();
+
+    }
+
+});
+
+
+
+// Second message
+
+function secondMessage(){
+
+message("I am in a meeting. Please urgently transfer $500 to this account.<br><br>BSB: 083-XXX<br>Account: 41 XXX 118");
+
+
+showButtons(
+
+{
+text:"Send money",
+action:function(){
+
+message("I will send the money.",true);
+
+failed();
+
+}
+
+},
+
+{
+text:"Call John first",
+action:function(){
+
+message("I will verify first.",true);
+
+success();
+
+}
+
+}
+
+);
+
+
+}
+
+
+// Correct answer
+
+function success(){
+
+options.innerHTML="";
+
+result.innerHTML =
+"<h2>You Passed</h2>" +
+"<p>You checked the request before sending money.</p>" +
+"<button onclick='location.reload()'>Restart</button>";
+
+}
+
+
+// Wrong answer
+
+function failed(){
+
+options.innerHTML="";
+
+result.innerHTML =
+"<h2>You Were Scammed!!</h2>" +
+"<p>The attacker used urgency and impersonation tricks.</p>" +
+"<button onclick='location.reload()'>Restart</button>";
+
+}
+
+
+</script>
+
+
+</body>
+</html>
