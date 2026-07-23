@@ -2,26 +2,45 @@
 <html>
 <head>
 <title>Scam Simulation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
     background-color: lightgray;
     font-family: Arial;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 .phone {
-    width: 350px;
-    margin: 30px auto;
+    width: 100vw;
+    max-width: 400px;
     background: black;
     padding: 10px;
     border-radius: 20px;
+    box-sizing: border-box;
 }
 
 .screen {
     background: white;
-    height: 600px;
+    height: 90vh;
     border-radius: 15px;
     padding: 15px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin: 8px 0;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    background: #b8c5ff;
 }
 
 h2 {
@@ -41,14 +60,35 @@ h2 {
     text-align: right;
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 10px;
-    border: none;
-    background: #b8c5ff;
+/* Full screen warning for the scammed result */
+.fail-overlay {
+    position: fixed;
+    inset: 0;
+    background: red;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
+
+.fail-overlay h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.fail-overlay button {
+    width: auto;
+    padding: 12px 30px;
+    margin-top: 20px;
+    background: white;
+    color: red;
+    font-weight: bold;
+}
+
 </style>
 
 </head>
@@ -201,16 +241,15 @@ result.innerHTML =
 }
 
 
-// Wrong answer
+// Wrong answer - full screen red warning
 
 function failed(){
 
-options.innerHTML="";
-
-result.innerHTML =
-"<h2>You Were Scammed!!</h2>" +
-"<p>The attacker used urgency and impersonation tricks.</p>" +
-"<button onclick='location.reload()'>Restart</button>";
+document.body.innerHTML =
+"<div class='fail-overlay'>" +
+"<h1>YOU WERE SCAMMED</h1>" +
+"<button onclick='location.reload()'>Restart</button>" +
+"</div>";
 
 }
 
