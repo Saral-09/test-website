@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Scan Result</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: white;
+        }
+
+        .app {
+            min-height: 100vh;
+        }
+
+        .reveal {
+            background: red;
+            color: white;
+            text-align: center;
+            padding: 70px 30px;
+        }
+
+        .reveal h1 {
+            font-size: 35px;
+            margin: 0 0 12px;
+        }
+
+        .reveal p {
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+
+        .info {
+            padding: 20px;
+        }
+
+        .info h2 {
+            font-size: 17px;
+            text-align: center;
+        }
+
+        .info p {
+            font-size:14px;
+            line-height:1.5;
+            color:#333;
+            text-align:justify;
+        }
+
+
+        .info ul {
+            padding-left: 20px;
+        }
+
+        .info li {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            color: #333;
+            text-align:justify;
+        }
+
+
+        .tip {
+            background: #f2f2f2;
+            padding: 14px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 11px;
+            padding: 15px;
+        }
+
+
+        @media(min-width:480px) {
+
+            body {
+                background: #ddd;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .app {
+                width: 380px;
+                max-height: 90vh;
+                background: white;
+                border-radius: 30px;
+                overflow: hidden;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="app">
+
+        <div class="reveal">
+
+            <h1>GOTCHA</h1>
+
+            <p>
+                This QR code was completely safe, but the next one you scan in public might not be.
+            </p>
+
+        </div>
+
+
+        <div class="info">
+
+            <h2>How can scanning a QR code be dangerous?</h2>
+
+            <p>
+                Scammers can replace a real QR code with a fake one that redirects you to a convincing website. It may
+                look legitimate but can be used to steal your login details, personal information, or bank details.
+            </p>
+            <br>
+            <h2>Common Examples</h2>
+
+            <ul>
+                <li>
+                    <b>Parking lots:</b> You might stumble across a QR code to pay for parking, but it opens a fake payment page designed to steal your card details.
+
+                <li>
+                    <b>Restaurant tables:</b> Threat actors might place a fake menu QR code in restaurants that redirects you to a fake ordering page designed to collect your information.
+
+                <li>
+                    <b>Cafés:</b> We often see QR codes to connect to free Wi-Fi in public areas, but this might just be a trap to gather your personal information.
+                </li>
+
+                <li>
+                    <b>Public posters or giveaways:</b> There could be a QR code offering a prize or discount, but instead it leads to a credential-harvesting website, and you win nothing.
+                </li>
+            </ul>
+
+            <div class="tip">
+                <b>Remember:</b> Always think before you take any action.
+            </div>
+
+
+        </div>
+
+
+        <div class="footer">
+            MIS211 Cyber Security Awareness Campaign
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>
